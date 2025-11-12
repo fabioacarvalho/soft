@@ -45,6 +45,10 @@ flask_smorest
 flask-jwt-extended
 passlib
 flask_cors
+pytest
+pytest-flask
+factory-boy 
+faker
 ```
 
 ## How to use
