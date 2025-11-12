@@ -22,8 +22,8 @@ class CompanyCreateSchema(Schema):
     website = fields.Str(validate=validate.Length(max=100))
     logo = fields.Str(validate=validate.Length(max=255))
     email = fields.Email(
-        required=False,
-        metadata={"description": "E-mail do usuário admin (opcional)"}
+        required=True,
+        metadata={"description": "E-mail do usuário admin (obrigatório)"}
     )
 
 
@@ -36,6 +36,7 @@ class CompanyResponseSchema(Schema):
     phone = fields.Str()
     website = fields.Str()
     logo = fields.Str()
+    email = fields.Email()
     users = fields.Method("get_user")
 
     def get_user(self, obj):

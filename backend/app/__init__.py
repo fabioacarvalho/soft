@@ -18,11 +18,16 @@ api = Api()
 cors = CORS()
 
 
-def create_app():
+def create_app(config_class=None):
     app = Flask(__name__)
 
     # Setup environment configuration
-    app.config.from_object(os.getenv("FLASK_ENV", "config.DevelopmentConfig"))
+    # app.config.from_object(os.getenv("FLASK_ENV", "config.DevelopmentConfig"))
+
+    if config_class:
+        app.config.from_object(config_class)
+    else:
+        app.config.from_object(os.getenv("FLASK_ENV", "config.DevelopmentConfig"))
 
     cors.init_app(app, origins=["http://localhost:3000"], supports_credentials=True)
     db.init_app(app)

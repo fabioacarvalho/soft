@@ -12,6 +12,7 @@ class Company(db.Model):
     phone = db.Column(db.String(20))
     website = db.Column(db.String(100))
     logo = db.Column(db.String(255))
+    email = db.Column(db.String(100), unique=True, nullable=False)
 
     users = db.relationship("User", back_populates="company", cascade="all, delete-orphan")
 

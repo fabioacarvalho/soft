@@ -38,6 +38,7 @@ def authenticate_user(company_name: str, email: str, password: str):
             "email": user.email,
             "company_id": company.id if company else None,
             "company": company.name if company else None,
-            "is_superadmin": user.is_superadmin
+            "is_superadmin": user.is_superadmin,
+            "is_admin": user.is_admin
         }
     }

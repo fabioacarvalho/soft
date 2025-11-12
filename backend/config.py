@@ -41,7 +41,10 @@ class Config:
 
 class TestingConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = f"sqlite:///{Config.SQLITE_DB_PATH}"
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI="sqlite:///:memory:"
+    TESTING=True
+    JWT_SECRET_KEY="test-key"
 
 
 class DevelopmentConfig(Config):
