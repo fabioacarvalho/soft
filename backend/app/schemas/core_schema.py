@@ -1,5 +1,6 @@
 from marshmallow import Schema, fields, validate, validates, ValidationError
 import re
+from app.models.core_model import User
 
 
 # -------------------------- Funções auxiliares de validação -------------------------------
@@ -35,7 +36,10 @@ class CompanyResponseSchema(Schema):
     phone = fields.Str()
     website = fields.Str()
     logo = fields.Str()
-    users = fields.List(fields.Int())
+    users = fields.Method("get_user")
+
+    def get_user(self, obj):
+        return [user.to_dict() for user in obj.users]
 
 
 # -------------------------- User Schemas -------------------------------
@@ -47,6 +51,8 @@ class UserBaseSchema(Schema):
     bio = fields.Str()
     avatar_url = fields.Str()
     is_admin = fields.Bool()
+    is_superadmin = fields.Bool()
+    company_id = fields.Int()
 
 
 class UserResponseSchema(UserBaseSchema):

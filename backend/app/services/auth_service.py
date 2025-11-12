@@ -21,14 +21,19 @@ def authenticate_user(company_name: str, email: str, password: str):
         raise ValueError("Credenciais inválidas.")
 
     # Gera os tokens JWT
-    access_token = create_access_token(identity={"user_id": user.id, "company_id": company.id})
-    refresh_token = create_refresh_token(identity={"user_id": user.id, "company_id": company.id})
+    claims = {
+        "company_id": company.id if company else None,
+        "is_superadmin": user.is_superadmin
+    }
+    
+    access_token = create_access_token(identity=str(user.id), additional_claims=claims)
+    refresh_token = create_refresh_token(identity=str(user.id), additional_claims=claims)
 
     return {
         "access_token": access_token,
         "refresh_token": refresh_token,
         "user": {
-            "user_id": user.user_id,
+            "user_id": user.id,
             "name": user.name,
             "email": user.email,
             "company_id": company.id if company else None,

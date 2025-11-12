@@ -27,7 +27,7 @@ class Company(db.Model):
             "phone": self.phone,
             "website": self.website,
             "logo": self.logo,
-            "users": [u.id for u in self.users],
+            "users": [u.to_dict() for u in self.users],
         }
 
 
@@ -47,6 +47,20 @@ class User(db.Model):
 
     company_id = db.Column(db.Integer, db.ForeignKey("companies.id"), nullable=True)
     company = db.relationship("Company", back_populates="users")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "title": self.title,
+            "bio": self.bio,
+            "avatar_url": self.avatar_url,
+            "is_admin": self.is_admin,
+            "is_superadmin": self.is_superadmin,
+            "company_id": self.company_id,
+            "created_at": self.created_at.isoformat(),
+        }
 
     def __repr__(self):
         return f"<User {self.id} - {self.email}>"
