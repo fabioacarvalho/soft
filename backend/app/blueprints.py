@@ -2,8 +2,14 @@ from flask_smorest import Blueprint
 
 core_blp = Blueprint(
     "Core",
-    __name__,
+    "core",
     url_prefix="/api/core",
     description="Endpoints principais da aplicação",
-    # tags=["Core"]
+)
+
+auth_blp = Blueprint(
+    "Auth",
+    "auth",
+    url_prefix="/api/auth",
+    description="Endpoints de autenticação JWT"
 )

@@ -1,5 +1,5 @@
 from app import db
-from passlib.hash import pbkdf2_sha256 as sha256
+from passlib.hash import sha256_crypt as sha256
 
 
 class Company(db.Model):
@@ -13,7 +13,7 @@ class Company(db.Model):
     website = db.Column(db.String(100))
     logo = db.Column(db.String(255))
 
-    users = db.relationship("User", backref="company", cascade="all, delete-orphan")
+    users = db.relationship("User", back_populates="company", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"<Company {self.id} - {self.name}>"
@@ -35,7 +35,6 @@ class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    company_id = db.Column(db.Integer, db.ForeignKey("companies.id"), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
@@ -43,11 +42,32 @@ class User(db.Model):
     bio = db.Column(db.Text)
     avatar_url = db.Column(db.String(255))
     is_admin = db.Column(db.Boolean, default=False)
+    is_superadmin = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+    company_id = db.Column(db.Integer, db.ForeignKey("companies.id"), nullable=True)
+    company = db.relationship("Company", back_populates="users")
+
+    def __repr__(self):
+        return f"<User {self.id} - {self.email}>"
 
     def set_password(self, password: str):
-        from passlib.hash import sha256_crypt
-        self.password = sha256_crypt.hash(password)
+        self.password = sha256.hash(password)
 
     def check_password(self, password: str):
-        from passlib.hash import sha256_crypt
-        return sha256_crypt.verify(password, self.password)
+        return sha256.verify(password, self.password)
+    
+    @classmethod
+    def create_superadmin_if_not_exists(cls):
+        admin_email = "admin@soft.com"
+        admin = cls.query.filter_by(email=admin_email).first()
+        if not admin:
+            admin = cls(
+                email=admin_email,
+                name="Administrador Geral",
+                is_superadmin=True,
+                password=sha256.hash("admin123"),
+            )
+            db.session.add(admin)
+            db.session.commit()
+            print("Superadmin criado:", admin_email)

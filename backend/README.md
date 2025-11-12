@@ -64,7 +64,7 @@ flask db init
 2 - After you add ou make some change:<br>
 
 ```bash
-flask db migrate
+flask db migrate -m "your message"
 ```
 
 <br>
@@ -73,4 +73,11 @@ flask db migrate
 
 ```bash
 flask db upgrade
+```
+<br>
+
+4 - Create a superadmin if not exists: <br>
+
+```bash
+flask create-superadmin
 ```

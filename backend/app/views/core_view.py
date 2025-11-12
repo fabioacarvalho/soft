@@ -3,6 +3,7 @@ from flask.views import MethodView
 from app.blueprints import core_blp
 from app.schemas.core_schema import CompanyCreateSchema, CompanyWithAdminResponseSchema
 from app.services.core_service import create_company_with_admin
+from app.utils.decorators import admin_required
 
 
 @core_blp.route("/companies")
@@ -11,6 +12,7 @@ class CompanyResource(MethodView):
 
     @core_blp.arguments(CompanyCreateSchema)
     @core_blp.response(201, CompanyWithAdminResponseSchema)
+    @admin_required
     def post(self, data):
         """Cria uma nova empresa e um usuário admin padrão"""
         try:

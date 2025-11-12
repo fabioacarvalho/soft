@@ -14,6 +14,7 @@ class Config:
 
     # Configurações do Flask-Smorest / OpenAPI
     API_TITLE = "Soft API"
+    API_DESCRIPTION = "API to CRM Soft."
     API_VERSION = "1.0"
     OPENAPI_VERSION = "3.0.3"
     OPENAPI_URL_PREFIX = "/api/docs"
