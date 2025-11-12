@@ -1,0 +1,15 @@
+Flask==3.1.0
+SQLAlchemy==2.0.36
+Flask-SQLAlchemy==3.1.1
+Flask-Migrate==4.0.7
+python-dotenv==1.0.1
+mysqlclient==2.2.6
+Flask-RESTful==0.3.10
+marshmallow-sqlalchemy==1.1.0
+flasgger
+marshmallow==3.20.1 
+flask-marshmallow
+flask_smorest
+flask-jwt-extended
+passlib
+flask_cors

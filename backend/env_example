@@ -1,0 +1,12 @@
+DEBUG=True
+USERNAME='admin'
+PASSWORD='admin'
+SERVER='backend'
+DB='soft'
+
+JWT_SECRET_KEY = 'ljkhb34b2l3kj4b2l3kj4b23lkj4b23lkj4b23lk4jb23ljbl!blkjhb@#LJHBljhbLJHBljhbLJHB'
+SECRET_KEY = 'hkj4h32jl423j4kh234uj23l4hl4h2lku423@bhlb#BLjklbhjbLJ3B3jbljb2'
+FLASK_ENV='config.DevelopmentConfig'
+SQLALCHEMY_DATABASE_URI='postgresql://postgres:postgres@localhost/soft'
+SQLALCHEMY_TRACK_MODIFICATIONS=False
+DATABASE_URL='postgresql://postgres:postgres@localhost/soft'
