@@ -19,7 +19,8 @@ def create_company_with_admin(data):
         company_id=company.id,
         name=f"{company.name} Admin",
         email=data.get("email") or f"admin{company.id}@soft.com",
-        is_admin=True
+        is_admin=True,
+        role="admin"
     )
     admin_user.set_password(company.cnpj)
     db.session.add(admin_user)

@@ -1,5 +1,6 @@
 from app import db
 from passlib.hash import sha256_crypt as sha256
+from app.utils.permissions import ROLE_PERMISSIONS
 
 
 class Company(db.Model):
@@ -44,6 +45,7 @@ class User(db.Model):
     avatar_url = db.Column(db.String(255))
     is_admin = db.Column(db.Boolean, default=False)
     is_superadmin = db.Column(db.Boolean, default=False)
+    role = db.Column(db.String(20), nullable=False, default="seller")
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
     company_id = db.Column(db.Integer, db.ForeignKey("companies.id"), nullable=True)
@@ -59,6 +61,7 @@ class User(db.Model):
             "avatar_url": self.avatar_url,
             "is_admin": self.is_admin,
             "is_superadmin": self.is_superadmin,
+            "role": self.role,
             "company_id": self.company_id,
             "created_at": self.created_at.isoformat(),
         }
@@ -72,6 +75,25 @@ class User(db.Model):
     def check_password(self, password: str):
         return sha256.verify(password, self.password)
     
+    def has_permission(self, perm: str) -> bool:
+        user_perms = ROLE_PERMISSIONS.get(self.role, set())
+        return "*" in user_perms or perm in user_perms
+
+    @staticmethod
+    def get_current():
+        from flask_jwt_extended import get_jwt_identity
+        uid = get_jwt_identity()
+        return User.query.get(uid)
+
+    # @staticmethod 
+    # def get_current():
+    #     from flask_jwt_extended import get_jwt_identity
+    #     identity = get_jwt_identity()
+    #     if not identity or "user_id" not in identity:
+    #         return None
+
+    #     return User.query.get(int(identity["user_id"]))
+
     @classmethod
     def create_superadmin_if_not_exists(cls):
         admin_email = "admin@soft.com"
@@ -81,6 +103,7 @@ class User(db.Model):
                 email=admin_email,
                 name="Administrador Geral",
                 is_superadmin=True,
+                role="superadmin",
                 password=sha256.hash("admin123"),
             )
             db.session.add(admin)

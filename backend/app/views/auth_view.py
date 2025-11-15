@@ -4,7 +4,8 @@ from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_tok
 from app.schemas.auth_schema import LoginSchema, TokenResponseSchema
 from app.services.auth_service import authenticate_user
 from app.blueprints import auth_blp
-
+from app.models.core_model import User
+from app.utils.permissions import ROLE_PERMISSIONS
 
 
 @auth_blp.route("/login")
@@ -41,9 +42,24 @@ class TokenRefreshResource(MethodView):
 class ProfileResource(MethodView):
     @jwt_required()
     def get(self):
+        identity = get_jwt_identity()
         claims = get_jwt()
+
         return {
-            "logged_user": claims["email"],
+            "logged_user": identity,
             "company_id": claims.get("company_id"),
-            "is_superadmin": claims["is_superadmin"]
+            "is_superadmin": claims.get("is_superadmin")
+        }
+
+
+@auth_blp.route("/me/permissions")
+class MePermissionsResource(MethodView):
+
+    @jwt_required()
+    def get(self):
+        user = User.get_current()
+
+        return {
+            "role": user.role,
+            "permissions": list(ROLE_PERMISSIONS.get(user.role, []))
         }

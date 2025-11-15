@@ -21,12 +21,31 @@ def client(app):
 
 @pytest.fixture
 def superadmin(app):
-    user = User(
+    existing = User.query.filter_by(email="admin@soft.com").first()
+    if existing:
+        return existing
+
+    admin = User(
         name="Super Admin",
         email="admin@soft.com",
         is_superadmin=True,
-        password=sha256_crypt.hash("admin123")
+        password=sha256_crypt.hash("admin123"),
+        role="superadmin"
     )
-    db.session.add(user)
+    db.session.add(admin)
     db.session.commit()
-    return user
+    return admin
+
+
+@pytest.fixture
+def seller(app):
+    u = User(
+        company_name="",
+        name="Vendedor",
+        email="seller@test.com",
+        role="seller"
+    )
+    u.set_password("seller123")
+    db.session.add(u)
+    db.session.commit()
+    return u

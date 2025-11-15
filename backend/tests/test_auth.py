@@ -3,13 +3,9 @@ from flask_jwt_extended import decode_token
 
 def test_login_superadmin(client, superadmin):
     """Teste de login do superadmin"""
-    payload = {
-        "company_name": "",
-        "email": "admin@soft.com",
-        "password": "admin123"
-    }
 
     response = client.post("/api/auth/login", json={
+        "company_name": "",
         "email": "admin@soft.com",
         "password": "admin123"
     })
