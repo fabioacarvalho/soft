@@ -12,15 +12,15 @@ export default async function Container({ children }: { children: React.ReactNod
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true"
   
   return (
-    <div>
+    <div className="h-screen flex">
         <SidebarProvider defaultOpen={defaultOpen}>
           <AppSidebar />
           <SidebarTrigger />
-          <main className=" w-full max-w-7xl px-4 mt-2 sm:px-6 lg:px-8">
+          <main className="flex flex-col w-full  px-4 mt-2 sm:px-6 lg:px-8">
             <Navbar />
             <Separator className="my-4 " />
 
-            <div className="container mx-auto px-4 mt-10">
+            <div className="flex-1 overflow-y-auto container mx-auto px-4 mt-10 ">
               {children}
             </div>
 
