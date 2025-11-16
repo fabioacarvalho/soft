@@ -1,10 +1,11 @@
 "use server";
 
-import { Header } from "./Header";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/sidebar"
 import { cookies } from "next/headers"
 import { Separator } from "@radix-ui/react-separator";
+
+import Navbar from "@/components/navbar/Navbar";
 
 export default async function Container({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies()
@@ -16,7 +17,7 @@ export default async function Container({ children }: { children: React.ReactNod
           <AppSidebar />
           <SidebarTrigger />
           <main className=" w-full max-w-7xl px-4 mt-2 sm:px-6 lg:px-8">
-            <Header />
+            <Navbar />
             <Separator className="my-4 " />
 
             <div className="container mx-auto px-4 mt-10">
