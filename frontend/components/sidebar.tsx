@@ -36,7 +36,7 @@ const items = [
   },
   {
     title: "Pipeline",
-    url: "#",
+    url: "/business",
     icon: Calendar,
   },
   {
