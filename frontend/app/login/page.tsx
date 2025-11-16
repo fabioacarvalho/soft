@@ -29,6 +29,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState } from "react";
+import { DarkModeButton } from "@/components/DarkModeButton";
 
 const companys = [
   {
@@ -58,99 +59,103 @@ export default function LoginPage() {
   const [value, setValue] = useState("")
 
   return (
-
-    <Card className="w-full max-w-sm">
-      <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
-        <CardDescription>
-          Enter your email below to login to your account
-        </CardDescription>
-        <CardAction>
-          <Button variant="link">Sign Up</Button>
-        </CardAction>
-      </CardHeader>
-      <CardContent>
-        <form>
-          <div className="flex flex-col gap-6">
-            <div className="grid gap-2">
-              <Label htmlFor="company">Company</Label>
-              <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    role="combobox"
-                    aria-expanded={open}
-                    className="w-[200px] justify-between"
-                  >
-                    {value
-                      ? companys.find((company) => company.value === value)?.label
-                      : "Select company..."}
-                    <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-[200px] p-0">
-                  <Command>
-                    <CommandInput placeholder="Search framework..." />
-                    <CommandList>
-                      <CommandEmpty>No Company found.</CommandEmpty>
-                      <CommandGroup>
-                        {companys.map((company) => (
-                          <CommandItem
-                            key={company.value}
-                            value={company.value}
-                            onSelect={(currentValue) => {
-                              setValue(currentValue === value ? "" : currentValue)
-                              setOpen(false)
-                            }}
-                          >
-                            <CheckIcon
-                              className={cn(
-                                "mr-2 h-4 w-4",
-                                value === company.value ? "opacity-100" : "opacity-0"
-                              )}
-                            />
-                            {company.label}
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
-                    </CommandList>
-                  </Command>
-                </PopoverContent>
-              </Popover>
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <a
-                  href="#"
-                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                >
-                  Forgot your password?
-                </a>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="fixed top-4 right-4 px-4 py-2 ">
+        <DarkModeButton />
+      </div>
+      <Card className="w-full max-w-xl">
+        <CardHeader>
+          <CardTitle>Login to your account</CardTitle>
+          <CardDescription>
+            Enter your email below to login to your account
+          </CardDescription>
+          <CardAction>
+            <Button variant="link">Sign Up</Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          <form>
+            <div className="flex flex-col gap-6">
+              <div className="grid gap-2">
+                <Label htmlFor="company">Company</Label>
+                <Popover open={open} onOpenChange={setOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      aria-expanded={open}
+                      className="justify-between"
+                    >
+                      {value
+                        ? companys.find((company) => company.value === value)?.label
+                        : "Select company..."}
+                      <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className=" p-0">
+                    <Command>
+                      <CommandInput placeholder="Search framework..." />
+                      <CommandList>
+                        <CommandEmpty>No Company found.</CommandEmpty>
+                        <CommandGroup>
+                          {companys.map((company) => (
+                            <CommandItem
+                              key={company.value}
+                              value={company.value}
+                              onSelect={(currentValue) => {
+                                setValue(currentValue === value ? "" : currentValue)
+                                setOpen(false)
+                              }}
+                            >
+                              <CheckIcon
+                                className={cn(
+                                  "mr-2 h-4 w-4",
+                                  value === company.value ? "opacity-100" : "opacity-0"
+                                )}
+                              />
+                              {company.label}
+                            </CommandItem>
+                          ))}
+                        </CommandGroup>
+                      </CommandList>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
               </div>
-              <Input id="password" type="password" required />
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  required
+                />
+              </div>
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="password">Password</Label>
+                  <a
+                    href="#"
+                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                  >
+                    Forgot your password?
+                  </a>
+                </div>
+                <Input id="password" type="password" required />
+              </div>
             </div>
-          </div>
-        </form>
-      </CardContent>
-      <CardFooter className="flex-col gap-2">
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
-        <Button variant="outline" className="w-full">
-          Login with Google
-        </Button>
-      </CardFooter>
-    </Card>
+          </form>
+        </CardContent>
+        <CardFooter className="flex-col gap-2">
+          <Button type="submit" className="w-full">
+            Login
+          </Button>
+          <Button variant="outline" className="w-full">
+            Login with Google
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
 
     // <div className="min-h-screen flex items-center justify-center">
     //   <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
