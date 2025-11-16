@@ -1,6 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { Calendar, Home, Inbox, Search, Settings, User2, ChevronUp } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import LogoImage from "@/public/img/logo/logo-soft-crm-transp.png";
+import Image from "next/image";
 
 import {
   Sidebar,
@@ -58,7 +61,8 @@ export function AppSidebar() {
       {/* Header */}
 
       <a className="font-bold text-center mt-3 mb-3" href="/">
-        <span>Soft</span>
+        {/* <img src={LogoImage} alt="Soft CRM" className="mx-auto mb-2 h-8 w-auto" /> */}
+        <Image src={LogoImage} alt="Logo" width={150} height={40} />
       </a>
 
       <DropdownMenuSeparator />
