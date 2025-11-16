@@ -8,6 +8,7 @@ import { ChangeEvent, useState } from "react";
 export default function TaskDescription() {
 
     const [textCounter, setTextCounter] = useState(0);
+    const [textValue, setTextValue] = useState("");
     
     function handleTextChange(event: ChangeEvent<HTMLTextAreaElement>) {
         const inputText = event.target.value;
@@ -15,6 +16,7 @@ export default function TaskDescription() {
             return; // Prevent input if it exceeds 200 characters
         }
         setTextCounter(inputText.length);
+        setTextValue(inputText);
     }
 
     return (
@@ -26,7 +28,7 @@ export default function TaskDescription() {
                 id="task-description"
                 placeholder="Enter task description"
                 className="resize-none"
-                value={textCounter}
+                value={textValue}
                 onChange={handleTextChange}
             />
 
