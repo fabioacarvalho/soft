@@ -1,3 +1,5 @@
+'use client';
+
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { Textarea } from "@/components/ui/textarea";
 import { FaCircleExclamation } from "react-icons/fa6";

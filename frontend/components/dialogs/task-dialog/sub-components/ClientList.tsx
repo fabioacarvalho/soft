@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import {
@@ -16,30 +18,26 @@ import { useState } from 'react';
 import { IoMdCheckmark } from 'react-icons/io';
 
 type ClientItem = {
+    id: number;
     name: string;
     icon: IconType;
-    textColor: string;
-    backgroundColor: string;
 };
 
 const ClientItems: ClientItem[] = [
     {
+        id: 1,
         name: 'Low',
         icon: MdKeyboardDoubleArrowRight,
-        textColor: 'text-green-700',
-        backgroundColor: 'bg-green-100',
     },
     {
+        id: 2,
         name: 'Medium',
         icon: RiArrowDownDoubleFill,
-        textColor: 'text-yellow-700',
-        backgroundColor: 'bg-yellow-100',
     },
     {
+        id: 3,
         name: 'High',
         icon: MdOutlineKeyboardDoubleArrowUp,
-        textColor: 'text-red-700',
-        backgroundColor: 'bg-red-100',
     },
 ];
 
@@ -51,7 +49,7 @@ export default function ClientList() {
         return (
             <div className="flex items-center gap-2">
                 <div
-                    className={`p-1 rounded-md items-center size-6 justify-center text-lg ${selectedClient.backgroundColor} ${selectedClient.textColor}`}
+                    className={`p-1 rounded-md items-center size-6 justify-center text-lg`}
                 >
                     <Icon />
                 </div>
@@ -87,7 +85,7 @@ export default function ClientList() {
                             >
                                 <div className="flex items-center gap-2">
                                     <div
-                                        className={`p-1 rounded-md items-center size-6 justify-center text-lg ${item.backgroundColor} ${item.textColor}`}
+                                        className={`p-1 rounded-md items-center size-6 justify-center text-lg`}
                                     >
                                         <Icon />
                                     </div>

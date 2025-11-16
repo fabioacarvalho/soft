@@ -1,6 +1,7 @@
 import {Button } from "@/components/ui/button";
 import { MdOutlineSortByAlpha } from "react-icons/md";
 import SortingDropDown from "@/components/drop-downs/sorting-drop-down";
+import TaskDialog from "@/components/dialogs/task-dialog/TaskDialog";
 
 export default function KanbanAreaHeader() {
     return (
@@ -18,7 +19,10 @@ export default function KanbanAreaHeader() {
 
                 <SortingDropDown />
 
-                <Button className="rounded-md px-4" variant="outline" size="sm">New Deal</Button>
+                <div>
+                    <TaskDialog />
+                </div>
+                {/* <Button className="rounded-md px-4" variant="outline" size="sm">New Deal</Button> */}
             </div>
         </div>
     );

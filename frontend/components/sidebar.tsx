@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 // Menu items.
-const items = [
+const itemsBusiness = [
   {
     title: "Home",
     url: "/",
@@ -43,9 +43,45 @@ const items = [
     icon: Calendar,
   },
   {
-    title: "Search",
+    title: "Logs",
     url: "#",
     icon: Search,
+  },
+  {
+    title: "Settings",
+    url: "#",
+    icon: Settings,
+  },
+]
+
+const itemsMarketing = [
+  {
+    title: "Leads",
+    url: "#",
+    icon: Inbox,
+  },
+  {
+    title: "Pipeline",
+    url: "/business",
+    icon: Calendar,
+  },
+  {
+    title: "Settings",
+    url: "#",
+    icon: Settings,
+  },
+]
+
+const itemsCustomerSuccess = [
+  {
+    title: "Leads",
+    url: "#",
+    icon: Inbox,
+  },
+  {
+    title: "Pipeline",
+    url: "/business",
+    icon: Calendar,
   },
   {
     title: "Settings",
@@ -71,10 +107,46 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>Business</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {itemsBusiness.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Marketing</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {itemsMarketing.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Customer Success</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {itemsCustomerSuccess.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
