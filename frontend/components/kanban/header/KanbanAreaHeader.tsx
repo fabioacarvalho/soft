@@ -5,10 +5,9 @@ import TaskDialog from "@/components/dialogs/task-dialog/TaskDialog";
 
 export default function KanbanAreaHeader() {
     return (
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center overflow-y-auto ">
             <div className="flex gap-3 items-center">
                 <span className="text-2-xl font-bold">Pipeline</span>
-
             </div>
 
             <div className="flex items-center gap-2">

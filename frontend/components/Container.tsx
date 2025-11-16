@@ -20,7 +20,7 @@ export default async function Container({ children }: { children: React.ReactNod
             <Navbar />
             <Separator className="my-4 " />
 
-            <div className="flex-1 overflow-y-auto container mx-auto px-4 mt-10 ">
+            <div className="flex-1 overflow-y-auto container mx-auto px-4">
               {children}
             </div>
 

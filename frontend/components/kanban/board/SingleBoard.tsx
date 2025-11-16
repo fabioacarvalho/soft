@@ -23,7 +23,7 @@ export default function SingleBoard({ board }: { board: BoardType }) {
             </div>
 
             {/* Tasks Container */}
-            <div className="mt-7">
+            <div className="flex-1 overflow-y-auto mt-7">
                 {tasks.map((task, index) => (
                     <SingleTask key={index} /> // task={task}
                 ))}

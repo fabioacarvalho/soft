@@ -27,14 +27,14 @@ import {
 
 // Menu items.
 const itemsBusiness = [
-  {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
+  // {
+  //   title: "Home",
+  //   url: "/",
+  //   icon: Home,
+  // },
   {
     title: "Leads",
-    url: "#",
+    url: "/",
     icon: Inbox,
   },
   {
@@ -106,6 +106,14 @@ export function AppSidebar() {
       {/* Content */}
 
       <SidebarContent>
+        <SidebarMenuItem key="Home">
+          <SidebarMenuButton asChild>
+            <a href="/">
+              <Home />
+              <span>Home</span>
+            </a>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
         <SidebarGroup>
           <SidebarGroupLabel>Business</SidebarGroupLabel>
           <SidebarGroupContent>

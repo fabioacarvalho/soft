@@ -30,7 +30,7 @@ export function BusinessHeader() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-              <Link href="/deals">Deals</Link>
+              <Link href="/business/deals">Deals</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>

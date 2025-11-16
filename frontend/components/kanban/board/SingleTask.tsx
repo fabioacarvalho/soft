@@ -5,7 +5,7 @@ import TasksDropDown from "@/components/drop-downs/tasks-drop-down";
 
 export default function SingleTask() {
     return (
-        <Card className="shadow-none">
+        <Card className="shadow-none mb-3">
             <CardHeader className="p-4">
                 <div className="flex justify-between items-center">
                     <div className="p-1 py-[4px] bg-green-500/15 rounded-3-xl px-2 pr-4 font-medium text-green-900 flex items-center gap-1 text-sm  ">
